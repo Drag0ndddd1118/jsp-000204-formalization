@@ -2106,9 +2106,7 @@ lemma ratioLower_tendsto_half : Tendsto ratioLower atTop (𝓝 (1 / 2 : ℝ)) :=
   have hden : Tendsto (fun k : ℕ ↦ (2 : ℝ) + modulusUpperError k) atTop (𝓝 2) := by
     simpa using (tendsto_const_nhds.add modulusUpperError_tendsto_zero)
   have hnum : Tendsto (fun _k : ℕ ↦ (1 : ℝ)) atTop (𝓝 1) := tendsto_const_nhds
-  convert hnum.div hden (by norm_num : (2 : ℝ) ≠ 0) using 1
-  · funext k
-    rfl
+  exact hnum.div hden (by norm_num : (2 : ℝ) ≠ 0)
 
 lemma ratioUpper_tendsto_half : Tendsto ratioUpper atTop (𝓝 (1 / 2 : ℝ)) := by
   change Tendsto
@@ -2118,9 +2116,7 @@ lemma ratioUpper_tendsto_half : Tendsto ratioUpper atTop (𝓝 (1 / 2 : ℝ)) :=
     simpa using (tendsto_const_nhds.add tailError_tendsto_zero)
   have hden : Tendsto (fun k : ℕ ↦ (2 : ℝ) - modulusLowerError k) atTop (𝓝 2) := by
     simpa using (tendsto_const_nhds.sub modulusLowerError_tendsto_zero)
-  convert hnum.div hden (by norm_num : (2 : ℝ) ≠ 0) using 1
-  · funext k
-    rfl
+  exact hnum.div hden (by norm_num : (2 : ℝ) ≠ 0)
 
 lemma ratioLower_le_cell {k : ℕ} {r : ℝ} (hk : 2 ≤ k) (hr : InCell k r)
     (hsmall : modulusLowerError k < 1) :
